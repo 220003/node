@@ -12,6 +12,13 @@ console.log(PORT)
 //サーバー作成
 const app = express()
 
+//ミドルウェアの設定
+//publicフォルダを静的コンテンツのフォルダに設定
+app.use(express.static(__dirname + '/public'))
+//URLエンコード
+app.use(express.urlencoded({ extended: true }))
+
+
 //getリクエスト
 app.get('/',(req,res) => {//URLのパス,(リクエスト,レスポンス)
     console.log(req.body)
@@ -25,6 +32,21 @@ app.get('/',(req,res) => {//URLのパス,(リクエスト,レスポンス)
 //getリクエスト
 app.get('/profile',(req,res) => {//URLのパス,(リクエスト,レスポンス)
     res.send('Profile Page')
+})
+
+//postリクエスト
+app.post('/auth',(req,res) => {//URLのパス,(リクエスト,レスポンス)
+    var loginName = req.body.login_name
+    var password = req.body.password
+    console.log(loginName, password)
+
+    var message = "ログイン失敗"
+    //envで設定した値でログインチェック
+    if (loginName == process.env.LOGIN_NAME
+        && password == process.env.PASSWORD) {
+            message = "ログイン成功"
+    }
+    res.send(message)
 })
 
 //サーバ停止　ctrl+c
