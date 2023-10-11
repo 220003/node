@@ -22,6 +22,11 @@ app.get('/',(req,res) => {//URLのパス,(リクエスト,レスポンス)
     res.send('Hello!!!')
 })
 
+//getリクエスト
+app.get('/profile',(req,res) => {//URLのパス,(リクエスト,レスポンス)
+    res.send('Profile Page')
+})
+
 //サーバ停止　ctrl+c
 //サーバ待機(Listen)
 app.listen(PORT,HOST,() => {
