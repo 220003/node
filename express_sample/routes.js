@@ -12,19 +12,46 @@ router.get('/', (req, res) => {
     console.log(req.query)
 
     // レスポンスの処理
-    res.send('Hello!!!!!!')
+    // res.send('Hello!!!!!!')
+    //テンプレート表示(レンダリング)
+    res.render('index')
 })
 
 router.get('/profile', (req, res) => {
-    res.send('プロフィール')
+    var user={
+        id:1,
+        name:'YSE',
+        birthplace:'横浜',
+        hoby:['旅行','グルメ','スポーツ']
+    }
+    var data={
+        title:'プロフィール',
+        user:user,
+    }
+    res.render('profile',data)
 })
+
+// 商品一覧
+router.get('/item', (req, res) => {
+    var data={
+        title:'商品一覧',
+        items:item.get(),
+    }
+    //viewa/item/index.ejsにデータを渡して表示
+    res.render('item/index',data)
+})
+
 
 // item/xxのルーティング(パスパラメータ)
 router.get('/item/:id', (req, res) => {
     const id=req.params.id
     //IDで商品データを取得
     var selectItem=item.find(id)
-    res.send(selectItem.name)
+    var data={
+        title:'商品詳細',
+        item:selectItem
+    }
+    res.render('item/detail',data)
 })
 
 // POSTリクエスト
