@@ -17,6 +17,8 @@ const app = express()
 app.use(express.static(__dirname + '/public'))
 //URLエンコード
 app.use(express.urlencoded({ extended: true }))
+//EJSをテンプレートエンジンとして設定
+app.set('view engine','ejs')
 //ルーティングを有効
 app.use(routes)
 
