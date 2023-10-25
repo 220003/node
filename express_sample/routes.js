@@ -3,56 +3,62 @@ const express = require('express')
 // Routerオブジェクトを生成
 const router = express.Router()
 //mojuls/item.jsを読み込み
-const item=require('./models/item')
+//const item=require('./models/item')
+//HomeControllerモジュール読み込み
+const HomeController=require('./controllers/HomeController')
+//ItemControllerモジュール読み込み
+const ItemController=require('./controllers/ItemController')
+
 // GETリクエストの処理
-router.get('/', (req, res) => {
-    // リクエストの処理
-    console.log(req.body)
-    console.log(req.url)
-    console.log(req.query)
+//  トップページ
+router.get('/',HomeController.index //(req, res) => {
+    // // リクエストの処理
+    // console.log(req.body)
+    // console.log(req.url)
+    // console.log(req.query)
 
-    // レスポンスの処理
-    // res.send('Hello!!!!!!')
-    //テンプレート表示(レンダリング)
-    res.render('index')
-})
+    // // レスポンスの処理
+    // // res.send('Hello!!!!!!')
+    // //テンプレート表示(レンダリング)
+    // res.render('index')}
+    )
 
-router.get('/profile', (req, res) => {
-    var user={
-        id:1,
-        name:'YSE',
-        birthplace:'横浜',
-        hoby:['旅行','グルメ','スポーツ']
-    }
-    var data={
-        title:'プロフィール',
-        user:user,
-    }
-    res.render('profile',data)
-})
+router.get('/profile', HomeController.profile//(req, res) => {
+//     var user={
+//         id:1,
+//         name:'YSE',
+//         birthplace:'横浜',
+//         hoby:['旅行','グルメ','スポーツ']
+//     }
+//     var data={
+//         title:'プロフィール',
+//         user:user,
+//     }
+//     res.render('profile',data)}
+    )
 
 // 商品一覧
-router.get('/item', (req, res) => {
-    var data={
-        title:'商品一覧',
-        items:item.get(),
-    }
-    //viewa/item/index.ejsにデータを渡して表示
-    res.render('item/index',data)
-})
+router.get('/item',ItemController.index// (req, res) => {
+    // var data={
+    //     title:'商品一覧',
+    //     items:item.get(),
+    // }
+    // //viewa/item/index.ejsにデータを渡して表示
+    // res.render('item/index',data)}
+    )
 
 
 // item/xxのルーティング(パスパラメータ)
-router.get('/item/:id', (req, res) => {
-    const id=req.params.id
-    //IDで商品データを取得
-    var selectItem=item.find(id)
-    var data={
-        title:'商品詳細',
-        item:selectItem
-    }
-    res.render('item/detail',data)
-})
+router.get('/item/:id', ItemController.detail//(req, res) => {
+    // const id=req.params.id
+    // //IDで商品データを取得
+    // var selectItem=item.find(id)
+    // var data={
+    //     title:'商品詳細',
+    //     item:selectItem
+    // }
+    // res.render('item/detail',data)}
+    )
 
 // POSTリクエスト
 router.post('/auth', (req, res) => {
