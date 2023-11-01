@@ -8,6 +8,8 @@ const router = express.Router()
 const HomeController=require('./controllers/HomeController')
 //ItemControllerモジュール読み込み
 const ItemController=require('./controllers/ItemController')
+//LoginControllerモジュール読み込み
+const LoginController=require('./controllers/LoginController')
 
 // GETリクエストの処理
 //  トップページ
@@ -60,27 +62,29 @@ router.get('/item/:id', ItemController.detail//(req, res) => {
     // res.render('item/detail',data)}
     )
 
-// POSTリクエスト
-router.post('/auth', (req, res) => {
-    // POSTデータ取得
-    var loginName = req.body.login_name
-    var password = req.body.password
-    console.log(loginName, password)
+router.get('/login',LoginController.index)
 
-    var message = "ログイン失敗"
-    // .env で設定した値で、ログインチェック
-    // TODO：データベースに接続してユーザ取得
-    // TODO：パスワードはハッシュ値でチェック
-    if (loginName == process.env.LOGIN_NAME
-        && password == process.env.PASSWORD) {
-            message = "ログイン成功"
-        //TODO ログインが成功したらユーザの状態を保存
-        //TODO ログイン後のページの転送
-    } else {
-        // TODO ログイン画面に戻す
-    }
-    res.send(message)
-})
+// POSTリクエスト
+router.post('/auth',LoginController.auth //(req, res) => {
+    // // POSTデータ取得
+    // var loginName = req.body.login_name
+    // var password = req.body.password
+    // console.log(loginName, password)
+
+    // var message = "ログイン失敗"
+    // // .env で設定した値で、ログインチェック
+    // // TODO：データベースに接続してユーザ取得
+    // // TODO：パスワードはハッシュ値でチェック
+    // if (loginName == process.env.LOGIN_NAME
+    //     && password == process.env.PASSWORD) {
+    //         message = "ログイン成功"
+    //     //TODO ログインが成功したらユーザの状態を保存
+    //     //TODO ログイン後のページの転送
+    // } else {
+    //     // TODO ログイン画面に戻す
+    // }
+    // res.send(message)}
+    )
 
 // モジュール化
 module.exports = router
