@@ -19,7 +19,8 @@ exports.auth = (req, res) => {
 
     if (authUser) {
         //認証ユーザがいれば、ユーザをセッションに保存
-        req.session.authUser=authUser
+        req.session.authUser = authUser
+        
         //ユーザホームにリダイレクト
         res.redirect('/user')
     } else {

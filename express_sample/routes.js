@@ -12,7 +12,12 @@ const ItemController=require('./controllers/ItemController')
 const LoginController=require('./controllers/LoginController')
 //UserControllerモジュール読み込み
 const UserController=require('./controllers/UserController')
+//RegistControllerモジュール読み込み
+const RegistController=require('./controllers/UserController')
 
+// Regist 
+router.get('/regist', RegistController.index)
+router.post('/regist/add', RegistController.add)
 // GETリクエストの処理
 //  トップページ
 router.get('/',HomeController.index //(req, res) => {

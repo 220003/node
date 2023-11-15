@@ -21,4 +21,4 @@ class User extends Model {
 }
 
 //モジュール化
-module.exports = User
+//module.exports = User
