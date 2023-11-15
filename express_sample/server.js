@@ -25,6 +25,14 @@ app.set('view engine','ejs')
 app.set('layout','layouts/default')
 //ミドルウェアとして利用    
 app.use(layouts)
+//モジュールを読み込み
+const session = require('express-session')
+//ミドルウェア登録
+app.use(session({
+secret: 'secret_key',
+resave: false,
+saveUninitalized: false,
+}))
 //ルーティングを有効
 app.use(routes)
 

@@ -10,6 +10,8 @@ const HomeController=require('./controllers/HomeController')
 const ItemController=require('./controllers/ItemController')
 //LoginControllerモジュール読み込み
 const LoginController=require('./controllers/LoginController')
+//UserControllerモジュール読み込み
+const UserController=require('./controllers/UserController')
 
 // GETリクエストの処理
 //  トップページ
@@ -85,6 +87,10 @@ router.post('/auth',LoginController.auth //(req, res) => {
     // }
     // res.send(message)}
     )
+
+    //User
+    router.get('/user',UserController.index)
+    router.get('/user/logout',UserController.logout)
 
 // モジュール化
 module.exports = router
